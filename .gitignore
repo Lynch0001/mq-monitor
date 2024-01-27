@@ -1,0 +1,21 @@
+# terraform specific files/directories #
+######################################
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# intellij specific files/directories #
+######################################
+/.idea/
+**/.idea
+*.ipr
+*.iws
+*.iml
+
+# Eclipse specific files/directories #
+######################################
+.classpath
+.project
+.settings
+.metadata

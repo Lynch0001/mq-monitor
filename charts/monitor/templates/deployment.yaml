@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-monitor
+  namespace: mq
+  labels:
+    app: mq-monitor
+spec:
+  selector:
+    matchLabels:
+      app: mq-monitor
+  replicas: 1
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: mq-monitor
+    spec:
+      containers:
+        - name: mq-monitor
+          image: yannig/mq-metric-prometheus:5.4.0
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /opt/config/mq_prometheus.yaml
+              subPath: mq_prometheus.yaml
+              name: prometheus
+              readOnly: false
+      volumes:
+        - name: prometheus
+          configMap:
+            name: mq-monitor-prometheus
+            items:
+              - key: mq_prometheus.yaml
+                path: mq_prometheus.yaml
+
+
