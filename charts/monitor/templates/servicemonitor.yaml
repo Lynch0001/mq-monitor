@@ -1,14 +1,14 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: mq-monitor
+  name: mq-monitor-{{ .Values.monitored.seqment }}
   namespace: default
   labels:
-    app: mq-monitor
+    app: mq-monitor-{{ .Values.monitored.seqment }}
 spec:
   selector:
     matchLabels:
-      app: mq-monitor
+      app: mq-monitor-{{ .Values.monitored.seqment }}
   namespaceSelector:
     matchNames:
       - default
