@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mq-monitor
+  name: mq-monitor-{{ .Values.monitored.seqment }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: mq-monitor
+    app: mq-monitor-{{ .Values.monitored.seqment }}
 spec:
   selector:
     matchLabels:
-      app: mq-monitor
+      app: mq-monitor-{{ .Values.monitored.seqment }}
   replicas: 1
   minReadySeconds: 10
   template:
     metadata:
       labels:
-        app: mq-monitor
+        app: mq-monitor-{{ .Values.monitored.seqment }}
       annotations:
         prometheus.io/path: {{ .Values.prometheus.path }}
         prometheus.io/port: {{ .Values.prometheus.port | quote }}
@@ -35,7 +35,7 @@ spec:
       volumes:
         - name: prometheus
           configMap:
-            name: mq-monitor-prometheus
+            name: mq-monitor-prometheus-{{ .Values.monitored.seqment }}
             items:
               - key: mq_prometheus.yaml
                 path: mq_prometheus.yaml
