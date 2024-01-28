@@ -1,0 +1,24 @@
+
+##
+## Set deployment values
+##
+
+deployment:
+  image: yannig/mq-metric-prometheus:5.4.0
+  container:
+    port: 9157
+
+##
+## Set configmap values
+##
+
+config:
+  logLevel: TRACE
+
+queueManager:
+  name: testqm
+
+prometheus:
+  port: 9157
+  path: "/metrics"
+  namespace: mq

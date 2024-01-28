@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mq-monitoring-service
+  namespace: mq
+  labels:
+    app: mq-monitor
+spec:
+  selector:
+    app: mq-monitor
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      name: metrics
+      port: {{ .Values.deployment.container.port }}
+      targetPort: {{ .Values.deployment.container.port }}
