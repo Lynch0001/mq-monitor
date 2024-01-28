@@ -4,6 +4,9 @@
 
 namespace: default
 
+monitored:
+  segment:
+
 ##
 ## Set deployment values
 ##
