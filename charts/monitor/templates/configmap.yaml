@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mq-monitor-prometheus
-  namespace: mq
+  namespace: {{ .Values.namespace }}
 data:
   mq_prometheus.yaml: |
     #
