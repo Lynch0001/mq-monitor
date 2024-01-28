@@ -15,11 +15,17 @@ spec:
     metadata:
       labels:
         app: mq-monitor
+      annotations:
+        prometheus.io/path: {{ .Values.prometheus.path }}
+        prometheus.io/port: {{ .Values.prometheus.port | quote }}
+        prometheus.io/scrape: 'true'
     spec:
       containers:
         - name: mq-monitor
-          image: yannig/mq-metric-prometheus:5.4.0
+          image: {{ .Values.deployment.image }}
           imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.deployment.container.port }}
           volumeMounts:
             - mountPath: /opt/config/mq_prometheus.yaml
               subPath: mq_prometheus.yaml
