@@ -26,10 +26,10 @@ data:
       # You can point at a CCDT here. You probably will have to use this
       # for TLS client connections to a queue manager
       # ccdtUrl:
-      connName: mq-ibm-mq(1414)
-      channel: DEV.ADMIN.SVRCONN
-      user: admin
-      password: passw0rd
+      connName: {{ .Values.queueManager.connection }}
+      channel: {{ .Values.queueManager.channel }}
+      user: {{ .Values.queueManager.user }}
+      password: {{ .Values.queueManager.password }}
 
       # Which queue should be used as the template for replies from the qmgr. This will
       # usually be a QMODEL
@@ -49,17 +49,10 @@ data:
     # "channels" is for all the traditional MQ channels including SVRCONNs. "amqpChannels" shows
     # status for the AMQP objects
     objects:
-      queues:
-        - APP.*
-        - "!SYSTEM.*"
-        - "!AMQ.*"
-        - QM*
-        - DEV*
-      channels:
-        - SYSTEM.*
-        - TO.*
-      topics:
-      subscriptions:
+      queues: {{ .Values.queueManager.queues }}
+      channels: {{ .Values.queueManager.channels }}
+      topics: {{ .Values.queueManager.topics }}
+      subscriptions: {{ .Values.queueManager.subscriptions }}
     #    amqpChannels:
     #    - "*"
     

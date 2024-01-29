@@ -17,7 +17,7 @@ deployment:
     port: 9157
 
 ##
-## Set configmap values
+## Set monitor configurations values
 ##
 
 config:
@@ -25,13 +25,25 @@ config:
 
 queueManager:
   name: testqm
-  connection: 
-  channel:
-  user:
-  password:
+  connection: mq-ibm-mq.mq(1414)
+  channel: DEV.ADMIN.SVRCONN
+  user: admin
+  password: passw0rd
   queues:
+    - APP.*
+    - "!SYSTEM.*"
+    - "!AMQ.*"
+    - QM*
+    - DEV*
+  channels:
+    - SYSTEM.*
+    - TO.*
   topics:
+  subscriptions:
 
+##
+## Set monitor prometheus configuration values
+##
 prometheus:
   port: metrics
   path: "/metrics"
