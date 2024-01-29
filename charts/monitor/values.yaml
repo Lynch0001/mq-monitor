@@ -33,6 +33,6 @@ queueManager:
   topics:
 
 prometheus:
-  port: 9157
+  port: metrics
   path: "/metrics"
   namespace: default
