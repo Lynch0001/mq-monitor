@@ -2,7 +2,7 @@
 ## Set general values
 ##
 
-namespace: default
+namespace: mq
 
 monitored:
   segment: ABC
