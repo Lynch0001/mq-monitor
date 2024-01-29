@@ -11,7 +11,7 @@ spec:
       app: mq-monitor-{{ .Values.monitored.seqment }}
   namespaceSelector:
     matchNames:
-      - default
+      - {{ .Values.namespace }}
   endpoints:
     - port: metrics
       path: /metrics
