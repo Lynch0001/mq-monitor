@@ -5,10 +5,6 @@ metadata:
   namespace: {{ .Values.namespace }}
   labels:
     app: mq-monitor-{{ .Values.monitored.seqment }}
-  annotations:
-    prometheus.io/path: {{ .Values.prometheus.path }}
-    prometheus.io/port: {{ .Values.prometheus.port }}
-    prometheus.io/scrape: 'true'
 spec:
   selector:
     app: mq-monitor-{{ .Values.monitored.seqment }}
