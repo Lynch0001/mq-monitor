@@ -17,7 +17,7 @@ spec:
         app: mq-monitor-{{ .Values.monitored.seqment }}
       annotations:
         prometheus.io/path: {{ .Values.prometheus.path }}
-        prometheus.io/port: {{ .Values.prometheus.port | quote }}
+        prometheus.io/port: {{ .Values.prometheus.port }}
         prometheus.io/scrape: 'true'
     spec:
       containers:
@@ -27,6 +27,25 @@ spec:
           ports:
             - containerPort: {{ .Values.deployment.container.port }}
               name: metrics
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.prometheus.path }}
+              port: {{ .Values.prometheus.port }}
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.prometheus.path }}
+              port: {{ .Values.prometheus.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
           volumeMounts:
             - mountPath: /opt/config/mq_prometheus.yaml
               subPath: mq_prometheus.yaml

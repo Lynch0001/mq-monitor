@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: mq-monitor-{{ .Values.monitored.seqment }}
-  namespace: default
+  namespace: {{ .Values.prometheus.namespace }}
   labels:
     app: mq-monitor-{{ .Values.monitored.seqment }}
 spec:
@@ -13,6 +13,6 @@ spec:
     matchNames:
       - {{ .Values.namespace }}
   endpoints:
-    - port: metrics
-      path: /metrics
+    - port: {{ .Values.prometheus.port }}
+      path: {{ .Values.prometheus.path }}
       interval: 15s
